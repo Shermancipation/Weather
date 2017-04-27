@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Weather</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+
+      $(document).on('submit', 'form', function() {
+
+          var location = $("#search").val();
+          console.log(location);
+          var key = "c96ce01b1c36b4d3a30747225248920b";
+          $.get('http://api.openweathermap.org/data/2.5/weather?q=' + location + '&&appid=' + key, function(res) {
+              var temp = res.main.temp;
+          }, 'json');
+          ("form").append("<h1>" + location + "</h1><h2>The current temperature is:" + temp);
+          return false;
+
+      });
+    });
+
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <input id="search" type="text" placeholder="First Name">
+      <input id="submit" type="submit" value="Search Weather">
+    </form>
+  </body>
+</html>
